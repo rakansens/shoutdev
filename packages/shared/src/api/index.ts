@@ -1,64 +1,9 @@
 /**
  * このファイルは共有APIクライアントのエントリーポイントです。
- * プロジェクト全体で使用されるAPI関連の型定義と関数をエクスポートします。
+ * プロジェクト全体で使用されるAPIクライアントをエクスポートします。
  */
 
-// API関連の型定義
-export interface ApiResponse<T> {
-  success: boolean;
-  data?: T;
-  error?: {
-    message: string;
-    code: string;
-  };
-}
-
-// クエストの型定義
-export interface Quest {
-  id: string;
-  title: string;
-  description: string;
-  reward: number;
-  completed: boolean;
-  imageUrl: string;
-}
-
-// デイリーログインの型定義
-export interface DailyLogin {
-  day: number;
-  reward: number;
-  claimed: boolean;
-}
-
-// ランキングの型定義
-export interface RankingUser {
-  id: string;
-  username: string;
-  points: number;
-  rank: number;
-  avatarUrl: string;
-}
-
-// ストアアイテムの型定義
-export interface StoreItem {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  imageUrl: string;
-  category: 'avatar' | 'item' | 'boost';
-}
-
-// ユーザープロフィールの型定義
-export interface UserProfile {
-  id: string;
-  username: string;
-  points: number;
-  avatarUrl: string;
-  level: number;
-  experience: number;
-  walletAddress?: string;
-}
+import { ApiResponse } from '../types';
 
 /**
  * APIリクエストを送信する基本関数
@@ -107,47 +52,102 @@ export async function fetchApi<T>(
 }
 
 /**
- * API URLを生成する関数
- * @param path APIパス
- * @param baseUrl ベースURL（デフォルト: '/api'）
- * @returns 完全なAPI URL
+ * クエスト関連のAPIクライアント
  */
-export function getApiUrl(path: string, baseUrl: string = '/api'): string {
-  // パスが既に完全なURLの場合はそのまま返す
-  if (path.startsWith('http://') || path.startsWith('https://')) {
-    return path;
-  }
-  
-  // パスが/で始まっていない場合は追加する
-  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
-  
-  // ベースURLの末尾の/を削除する
-  const normalizedBaseUrl = baseUrl.endsWith('/') 
-    ? baseUrl.slice(0, -1) 
-    : baseUrl;
-  
-  return `${normalizedBaseUrl}${normalizedPath}`;
-}
+export const questsApi = {
+  /**
+   * クエスト一覧を取得する
+   * @returns クエスト一覧
+   */
+  getQuests: () => fetchApi('/api/quests'),
+
+  /**
+   * クエストを取得する
+   * @param id クエストID
+   * @returns クエスト
+   */
+  getQuest: (id: string) => fetchApi(`/api/quests/${id}`),
+
+  /**
+   * クエストを完了する
+   * @param id クエストID
+   * @returns 完了結果
+   */
+  completeQuest: (id: string) => fetchApi(`/api/quests/${id}/complete`, {
+    method: 'POST',
+  }),
+};
 
 /**
- * クエリパラメータをURLに追加する関数
- * @param url ベースURL
- * @param params クエリパラメータオブジェクト
- * @returns クエリパラメータ付きのURL
+ * ユーザー関連のAPIクライアント
  */
-export function addQueryParams(url: string, params: Record<string, string | number | boolean | undefined>): string {
-  const urlObj = new URL(url, 'http://dummy-base.com');
-  
-  Object.entries(params).forEach(([key, value]) => {
-    if (value !== undefined) {
-      urlObj.searchParams.append(key, String(value));
-    }
-  });
-  
-  // ダミーベースURLを使用した場合は、そのパス部分だけを返す
-  if (url.startsWith('/')) {
-    return `${urlObj.pathname}${urlObj.search}`;
-  }
-  
-  return urlObj.toString();
-}
+export const usersApi = {
+  /**
+   * ユーザー情報を取得する
+   * @returns ユーザー情報
+   */
+  getProfile: () => fetchApi('/api/users/profile'),
+
+  /**
+   * ユーザー情報を更新する
+   * @param data 更新データ
+   * @returns 更新結果
+   */
+  updateProfile: (data: any) => fetchApi('/api/users/profile', {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  }),
+};
+
+/**
+ * デイリーログイン関連のAPIクライアント
+ */
+export const dailyLoginApi = {
+  /**
+   * デイリーログインを実行する
+   * @returns ログイン結果
+   */
+  login: () => fetchApi('/api/daily-login', {
+    method: 'POST',
+  }),
+
+  /**
+   * デイリーログイン履歴を取得する
+   * @returns ログイン履歴
+   */
+  getHistory: () => fetchApi('/api/daily-login/history'),
+};
+
+/**
+ * ランキング関連のAPIクライアント
+ */
+export const rankingApi = {
+  /**
+   * ランキングを取得する
+   * @param type ランキングタイプ
+   * @returns ランキング
+   */
+  getRanking: (type: string) => fetchApi(`/api/ranking?type=${type}`),
+};
+
+/**
+ * ストア関連のAPIクライアント
+ */
+export const storeApi = {
+  /**
+   * ストアアイテム一覧を取得する
+   * @returns アイテム一覧
+   */
+  getItems: () => fetchApi('/api/store'),
+
+  /**
+   * アイテムを購入する
+   * @param id アイテムID
+   * @param quantity 数量
+   * @returns 購入結果
+   */
+  purchaseItem: (id: string, quantity: number = 1) => fetchApi('/api/store/purchase', {
+    method: 'POST',
+    body: JSON.stringify({ id, quantity }),
+  }),
+};

@@ -1,16 +1,31 @@
 /**
  * このファイルはホームページコンポーネントです。
  * TONゲームのメインダッシュボードを表示します。
- * 最新の参考画像に基づいて、デザインを更新しました。
+ * 提供された参考画像に基づいて実装しました。
  */
 
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Music, CheckCircle, Play, Zap } from 'lucide-react';
 
 export default function HomePage() {
+  const router = useRouter();
+  
+  // 初回訪問時にスプラッシュ画面に遷移
+  useEffect(() => {
+    // セッションストレージをチェックして、初回訪問かどうかを判断
+    const hasVisited = sessionStorage.getItem('hasVisited');
+    
+    if (!hasVisited) {
+      // 初回訪問の場合、スプラッシュ画面に遷移
+      sessionStorage.setItem('hasVisited', 'true');
+      router.push('/splash');
+    }
+  }, [router]);
+  
   // ドットナビゲーション用の状態
   const [activeSlide, setActiveSlide] = useState(0);
   const totalSlides = 3;
@@ -43,32 +58,52 @@ export default function HomePage() {
   // クエストデータ（実際のアプリではAPIから取得）
   const quests = [
     {
-      id: 'join-x-1',
-      title: 'JOIN X',
-      description: 'THIS ID JHGYFOUVY',
-      progress: 3,
+      id: 'follow-x',
+      title: 'FOLLOW X',
+      description: 'FOLLOW THE SHOUT! X ACCOUNT.',
+      progress: 2,
       total: 3,
-      reward: 100,
+      reward: 10,
       color: 'blue',
       completed: false
     },
     {
-      id: 'join-x-2',
-      title: 'JOIN X',
-      description: 'THIS ID JHGYFOUVY',
+      id: 'follow-telegram',
+      title: 'FOLLOW TELEGRAM',
+      description: 'FOLLOW THE SHOUT! TELEGRAM ANNOUNCEMENT CHANNEL.',
       progress: 3,
       total: 3,
-      reward: 100,
+      reward: 10,
       color: 'green',
       completed: true
     },
     {
-      id: 'join-x-3',
-      title: 'JOIN X',
-      description: 'THIS ID JHGYFOUVY',
-      progress: 3,
-      total: 3,
-      reward: 100,
+      id: 'clear-tutorial',
+      title: 'CLEAR TUTORIAL',
+      description: 'CLEAR ALL STEPS OF THE TUTORIAL.',
+      progress: 25,
+      total: 30,
+      reward: 10,
+      color: 'blue',
+      completed: false
+    },
+    {
+      id: 'perfect-combo',
+      title: 'PERFECT COMBO',
+      description: 'PLAY A SONG WITHOUT MISSING ANY NOTES.',
+      progress: 0,
+      total: 1,
+      reward: 10,
+      color: 'blue',
+      completed: false
+    },
+    {
+      id: 'max-level',
+      title: 'MAX LEVEL',
+      description: 'LEVEL UP TO 99.',
+      progress: 25,
+      total: 99,
+      reward: 10,
       color: 'blue',
       completed: false
     }
@@ -79,14 +114,25 @@ export default function HomePage() {
       <header className="bg-user-main/80 backdrop-blur-sm p-4 flex justify-between items-center">
         <div className="flex items-center">
           <div className="w-10 h-10 rounded-full bg-gradient-profile flex items-center justify-center text-white font-bold">
-            H
+            P
           </div>
           <div className="ml-3">
-            <h1 className="text-white font-futuristic">HIROS</h1>
+            <h1 className="text-white font-futuristic">RHYTHM MASTER</h1>
+            <h2 className="text-white font-futuristic">PLAYER123</h2>
             <div className="flex items-center">
-              <div className="bg-white/20 text-white text-xs px-2 py-0.5 rounded-full flex items-center">
-                <span className="mr-1">1,250</span>
-                <span className="text-yellow-400">⚡</span>
+              <div className="flex items-center mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 7h-7.5a2.5 2.5 0 0 0-5 0H1a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h4.5a2.5 2.5 0 0 0 5 0H20a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1z"></path>
+                </svg>
+                <span className="text-white ml-1">99</span>
+              </div>
+              <div className="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="8" cy="21" r="1"></circle>
+                  <circle cx="19" cy="21" r="1"></circle>
+                  <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                </svg>
+                <span className="text-white ml-1">9,999</span>
               </div>
             </div>
           </div>
@@ -98,24 +144,15 @@ export default function HomePage() {
               <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
             </svg>
           </button>
-          <button className="bg-white/10 text-white p-2 rounded-full">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="3"></circle>
-              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-            </svg>
-          </button>
         </div>
       </header>
       
       <main className="flex-grow px-4 pt-2">
-        {/* クエストタイトル */}
-        <h2 className="text-white text-xl mb-2">QUESTS</h2>
-        
         {/* イベントバナー */}
-        <div className="relative rounded-xl overflow-hidden mb-6">
-          <div className="bg-black h-40 flex items-center justify-center relative">
+        <div className="relative rounded-xl overflow-hidden mb-6 bg-orange-400">
+          <div className="h-40 flex items-center justify-center relative">
             {/* NEW EVENTバッジ */}
-            <div className="absolute top-0 right-0 bg-red-600 text-white py-1 px-2 text-xs">
+            <div className="absolute top-0 right-0 bg-red-600 text-white py-1 px-2 text-xs font-bold rotate-90 origin-top-right translate-x-full translate-y-full">
               NEW EVENT
             </div>
             
@@ -131,9 +168,10 @@ export default function HomePage() {
               </p>
             </div>
             
-            {/* 背景の円 */}
-            <div className="absolute top-4 right-8 w-16 h-16 rounded-full bg-blue-500/20"></div>
-            <div className="absolute bottom-4 left-8 w-12 h-12 rounded-full bg-purple-500/20"></div>
+            {/* ポイント表示 */}
+            <div className="absolute top-2 right-2 bg-white/20 text-white text-xs px-2 py-1 rounded-sm flex items-center">
+              <span className="mr-1">10+</span>
+            </div>
           </div>
           
           {/* ドットナビゲーション */}
@@ -143,7 +181,7 @@ export default function HomePage() {
                 key={index}
                 className={`w-2 h-2 rounded-full ${
                   index === activeSlide 
-                    ? 'bg-blue-500' 
+                    ? 'bg-white' 
                     : 'bg-white/40'
                 }`}
               ></div>
@@ -170,7 +208,7 @@ export default function HomePage() {
                       <p className="text-white/80 text-xs">{quest.description}</p>
                     </div>
                     <div className="bg-white/20 text-white text-xs px-2 py-1 rounded-full">
-                      {quest.reward}
+                      {quest.reward}+
                     </div>
                   </div>
                   
@@ -187,23 +225,19 @@ export default function HomePage() {
                     <div className="text-white text-xs">
                       {quest.completed ? (
                         <span className="flex items-center">
-                          <CheckCircle size={14} className="mr-1" />
-                          {quest.progress}/{quest.total} COMPLETED
+                          COMPLETE
                         </span>
                       ) : (
                         `${quest.progress}/${quest.total} COMPLETED`
                       )}
                     </div>
                     
-                    {/* プレイボタンとライトニングボタン */}
-                    {index === 2 && (
+                    {/* 完了マーク */}
+                    {quest.completed && (
                       <div className="flex space-x-2">
-                        <button className="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center">
-                          <Play size={14} className="ml-0.5" />
-                        </button>
-                        <button className="bg-purple-500 text-white rounded-full w-6 h-6 flex items-center justify-center">
-                          <Zap size={14} />
-                        </button>
+                        <div className="bg-white text-green-600 rounded-full w-6 h-6 flex items-center justify-center">
+                          <CheckCircle size={14} />
+                        </div>
                       </div>
                     )}
                   </div>

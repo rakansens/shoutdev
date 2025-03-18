@@ -2,6 +2,7 @@
  * このファイルはNext.jsのルートレイアウトファイルです。
  * すべてのページに適用される共通のレイアウトを定義しています。
  * Telegram Mini App SDKの初期化も行います。
+ * Good Timesフォントを追加しました。
  */
 
 import '../styles/globals.css';
@@ -26,7 +27,7 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://use.typekit.net/akn4ocf.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       </head>
-      <body className="min-h-screen bg-deep-purple">
+      <body className="min-h-screen bg-deep-purple font-good-times">
         <div className="max-w-md mx-auto min-h-screen flex flex-col pb-16 md:pb-0">
           <TelegramInitializer />
           {children}

@@ -1,0 +1,5 @@
+This is a placeholder file. The actual splash.jpg image should be downloaded and placed in this directory.
+
+The image should show an anime-style character singing with a microphone, with "SHOUT!" text overlay and "PREPARING THE STAGE FOR TONIGHT" at the bottom.
+
+© 2025 ENTIENT, LTD.
