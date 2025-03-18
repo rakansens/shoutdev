@@ -1,0 +1,124 @@
+/**
+ * このファイルはグローバルCSSファイルです。
+ * TailwindCSSのディレクティブとカスタムスタイルを含みます。
+ * 参考画像に基づいて、より未来的なデザインに更新しました。
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-user-background text-user-text;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%233B1E66' fill-opacity='0.1'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-futuristic tracking-wider;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-gradient-neon-orange text-white px-4 py-2 rounded-lg hover:opacity-90 transition-all shadow-neon-orange;
+  }
+
+  .btn-secondary {
+    @apply bg-gradient-neon-blue text-white px-4 py-2 rounded-lg hover:opacity-90 transition-all shadow-neon-blue;
+  }
+
+  .btn-tertiary {
+    @apply bg-gradient-neon-green text-white px-4 py-2 rounded-lg hover:opacity-90 transition-all shadow-neon-green;
+  }
+
+  .card {
+    @apply bg-user-main/80 backdrop-blur-sm p-4 rounded-lg shadow-lg border border-white/10;
+  }
+
+  .card-blue {
+    @apply bg-user-card-blue/80 backdrop-blur-sm p-4 rounded-lg shadow-neon-blue border border-white/10;
+  }
+
+  .card-green {
+    @apply bg-user-card-green/80 backdrop-blur-sm p-4 rounded-lg shadow-neon-green border border-white/10;
+  }
+
+  .card-purple {
+    @apply bg-user-card-purple/80 backdrop-blur-sm p-4 rounded-lg shadow-neon-purple border border-white/10;
+  }
+
+  .card-orange {
+    @apply bg-user-card-orange/80 backdrop-blur-sm p-4 rounded-lg shadow-neon-orange border border-white/10;
+  }
+
+  .progress-bar {
+    @apply h-2 rounded-full overflow-hidden bg-white/20;
+  }
+
+  .progress-blue {
+    @apply bg-gradient-neon-blue;
+  }
+
+  .progress-green {
+    @apply bg-gradient-neon-green;
+  }
+
+  .progress-purple {
+    @apply bg-gradient-neon-purple;
+  }
+
+  .progress-orange {
+    @apply bg-gradient-neon-orange;
+  }
+
+  .badge {
+    @apply inline-flex items-center justify-center px-2 py-1 text-xs font-bold rounded-full;
+  }
+
+  .badge-new {
+    @apply bg-user-highlight text-white;
+  }
+
+  .badge-points {
+    @apply bg-white/10 backdrop-blur-sm text-white border border-white/20;
+  }
+
+  .profile-icon {
+    @apply w-16 h-16 rounded-full bg-gradient-profile flex items-center justify-center text-white text-xl font-bold shadow-lg;
+  }
+}
+
+/* アニメーション */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+/* スクロールバーのカスタマイズ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(10, 5, 24, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(59, 30, 102, 0.8);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 30, 102, 1);
+}

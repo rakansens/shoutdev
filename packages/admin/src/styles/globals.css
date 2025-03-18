@@ -1,0 +1,102 @@
+/**
+ * このファイルは管理者パネル用のグローバルCSSファイルです。
+ * TailwindCSSのディレクティブとカスタムスタイルを含みます。
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-admin-background text-admin-text;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-futuristic tracking-wider;
+  }
+}
+
+@layer components {
+  .admin-card {
+    @apply bg-admin-accent p-4 rounded-lg shadow-lg;
+  }
+
+  .admin-btn {
+    @apply bg-admin-button text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all;
+  }
+
+  .admin-btn-warning {
+    @apply bg-admin-warning text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all;
+  }
+  
+  .admin-table {
+    @apply w-full border-collapse;
+  }
+  
+  .admin-table th {
+    @apply bg-admin-accent text-white p-2 text-left;
+  }
+  
+  .admin-table td {
+    @apply border-b border-gray-700 p-2;
+  }
+  
+  .admin-table tr:hover {
+    @apply bg-admin-accent/20;
+  }
+  
+  .admin-form-group {
+    @apply mb-4;
+  }
+  
+  .admin-label {
+    @apply block mb-2 text-sm font-medium;
+  }
+  
+  .admin-input {
+    @apply bg-gray-800 border border-gray-700 text-white rounded-lg p-2 w-full;
+  }
+  
+  .admin-select {
+    @apply bg-gray-800 border border-gray-700 text-white rounded-lg p-2 w-full;
+  }
+  
+  .admin-textarea {
+    @apply bg-gray-800 border border-gray-700 text-white rounded-lg p-2 w-full;
+  }
+}
+
+/* アニメーション */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+/* スクロールバーのカスタマイズ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(24, 18, 37, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(59, 30, 102, 0.8);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 30, 102, 1);
+}
