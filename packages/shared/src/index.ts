@@ -4,13 +4,10 @@
  */
 
 // 型定義のエクスポート
-export * from './types';
+export * from './types/index';
 
 // ユーティリティ関数のエクスポート
-export * from './utils';
+export * from './utils/index';
 
 // APIクライアントのエクスポート
-export * from './api';
-
-// TON SDKのエクスポート
-export * from './services/ton-sdk';
+export * from './api/index';

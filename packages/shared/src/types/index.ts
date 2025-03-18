@@ -3,6 +3,10 @@
  * プロジェクト全体で使用される型定義をエクスポートします。
  */
 
+// 各種型定義ファイルをエクスポート
+export * from './api';
+export * from './ton';
+
 // ユーザー関連の型定義
 export interface UserType {
   id: string;
@@ -66,14 +70,4 @@ export interface UserItemType {
   item_id: string;
   quantity: number;
   purchased_at: string;
-}
-
-// API関連の型定義
-export interface ApiResponse<T> {
-  success: boolean;
-  data?: T;
-  error?: {
-    message: string;
-    code: string;
-  };
 }
